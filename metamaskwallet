@@ -1,0 +1,18 @@
+Practical 2: Create Your Own Wallet Using MetaMask
+Aim: Create a wallet using MetaMask for crypto transactions.
+Theory:
+• Cryptocurrency is a digital currency that uses cryptography and runs on a blockchain, with no bank in the middle. Bitcoin (2009) was the first; others are Ethereum (2015), Litecoin and Ripple. All non-Bitcoin coins are called altcoins.
+• Units are created by mining or bought from exchanges. You do not own a physical coin; you own a private key that lets you move a record on the ledger.
+• Wallet types: hot wallet (online software, e.g. MetaMask, convenient but exposed to the internet) and cold wallet (offline hardware device, safer for large amounts).
+• Each wallet has a public address (share it to receive funds) and a private key / 12-word seed phrase (never share it).
+Steps: Install MetaMask, create a password, back up the seed phrase, confirm it, view the account address, switch to a test network, get test Ether from a faucet, and send a test transaction (same screens as Practical 1).
+Conclusion: A MetaMask wallet was created and the concept of cryptocurrency transactions was understood.
+Viva questions and answers
+1. What is Bitcoin? The first and best-known cryptocurrency, created in 2009 by the pseudonymous Satoshi Nakamoto. It is a peer-to-peer digital currency recorded on a public blockchain and secured by Proof of Work mining, with a fixed supply of 21 million coins.
+2. What are the four most common cryptocurrency scams?
+• Fake investment / Ponzi schemes: promise guaranteed high returns and pay old investors with new investors' money.
+• Phishing: fake websites, emails or wallet apps that steal your seed phrase or password.
+• Rug pulls / fake tokens: developers launch a token, collect funds, then disappear.
+• Impersonation and giveaway scams: fake celebrity or romance profiles ask you to send crypto to get more back.
+3. How safe are money e-transfers? Generally safe when done through a bank or trusted app, because they use encryption, two-factor authentication and fraud monitoring. Risks: phishing, fake payment requests, wrong recipient (transfers are usually irreversible), weak passwords and public Wi-Fi. Stay safe by verifying the recipient, using 2FA, not clicking unknown links and checking statements.
+4. What is cryptojacking and how does it work? Cryptojacking is secretly using someone else's computer, phone or server to mine cryptocurrency. It works through malware or a malicious script on a web page that runs mining code in the background. Signs: slow device, overheating, high CPU use and battery drain. Prevention: antivirus, ad/script blockers, updated software and avoiding unknown downloads.
