@@ -1,0 +1,46 @@
+Practical 1: MetaMask Installation and Ether Spent per Transaction
+Aim: Install MetaMask and study how much Ether is spent per transaction.
+Theory:
+• Blockchain is a distributed ledger that stores records in linked blocks. It is decentralized, peer-to-peer, immutable and tamper-proof, and the network agrees on data by consensus.
+• MetaMask is a free browser extension wallet. It stores Ether and ERC-20 tokens, and lets web apps (dApps) interact with the Ethereum blockchain without you running a full node.
+• Ether (ETH) is the currency of Ethereum. Every transaction costs a gas fee:
+Transaction fee = Gas used x Gas price
+Gas price is quoted in Gwei (1 Gwei = 10^-9 ETH). A plain ETH transfer uses 21,000 gas, so at 20 Gwei the fee is 21,000 x 20 Gwei = 0.00042 ETH. In MetaMask you can choose Slow, Average or Fast; a higher gas price gets confirmed sooner.
+Steps:
+1. Open the Chrome Web Store (or Firefox/Opera add-ons), search MetaMask, click Add to Chrome, then Add Extension.
+2. Click the MetaMask icon, choose Create a Wallet, and set a password.
+3. Reveal the 12-word Secret Recovery Phrase, write it on paper, and confirm it in order.
+4. Copy your account address to receive test Ether (use a test network such as Sepolia, not the main network).
+5. Click Send, enter the recipient address and amount, choose Slow/Average/Fast, and note the estimated fee.
+6. Click Confirm, then open the Activity tab to see the transaction status, gas used and fee paid.
+Observation to write: record amount sent, gas price, gas used and total fee for two or three transactions with different speed settings, and show that fee = gas used x gas price.
+Conclusion: MetaMask was installed and a wallet created, and the Ether spent per transaction (gas fee) was studied.
+Viva questions and answers
+1. What are the different types of blockchain? Public (open to everyone, e.g. Bitcoin, Ethereum), Private (one organization controls it, e.g. Hyperledger), Hybrid (part public, part private, e.g. XRP/Ripple) and Consortium (managed by a group of organizations, e.g. Tendermint, Multichain).
+2. What are the key features of blockchain? Decentralization, peer-to-peer network, immutability, tamper-proof hashing, transparency, security through cryptography, and consensus (all nodes agree on the same ledger).
+3. What types of records can be kept in a blockchain? Financial transactions, supply-chain records, medical records, land and property records, digital identity, voting records, contracts and certificates.
+4. What is the difference between Ethereum and Bitcoin?
+Point
+Bitcoin
+Ethereum
+Purpose
+Digital currency (store of value)
+Platform for smart contracts and dApps
+Coin
+BTC
+Ether (ETH)
+Created
+2009, Satoshi Nakamoto
+2015, Vitalik Buterin and others
+Language
+Limited scripting
+Solidity (Turing-complete)
+Block time
+About 10 minutes
+About 12 seconds
+Consensus
+Proof of Work
+Proof of Stake
+5. What are Merkle trees? A Merkle tree is a binary tree of hashes. Each leaf is the hash of a transaction, each parent is the hash of its two children combined, and the single hash at the top is the Merkle root, stored in the block header. Changing any transaction changes the root, so tampering is detected. A transaction can be verified with only O(log n) hashes instead of the whole block.
+6. What is double spending? Spending the same digital coin twice, which is easy for digital data that can be copied. Blockchain prevents it: every transaction is verified by the network, recorded in order, and once confirmed in a block it cannot be changed. Waiting for more confirmations makes it safer.
+7. Give real-life use cases of blockchain. Cryptocurrency payments, supply-chain tracking (food, medicine), healthcare records, land registry, digital identity, voting, cross-border payments and smart-contract based insurance.
