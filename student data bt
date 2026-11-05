@@ -1,0 +1,50 @@
+Practical 4: Student Data Contract (Structure, Array, Fallback) and Gas Observation
+Aim: Write a Solidity program to create student data using structures, arrays and a fallback function, deploy it, and observe the transaction fee and gas values.
+Theory:
+• Array: a collection of elements of the same type accessed by index. A fixed-size array has a size set at declaration (uint[5]); a dynamic array grows at run time (uint[]) and supports push, pop and length.
+• Structure: a user-defined type that groups related data, declared with the struct keyword and accessed with the dot operator.
+struct <name> { <type> var1; <type> var2; }
+• Fallback function: a function with no name that runs when a call matches no function, or when plain Ether is sent. It must be external, cannot return anything, can be defined once per contract, and must be payable to accept Ether. In Solidity 0.6 and later, receive() handles plain Ether and fallback() handles unknown calls.
+Code (Solidity):
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract StudentData {
+    struct Student {                     // structure
+        uint id;
+        string name;
+        uint marks;
+    }
+
+    Student[] public students;           // dynamic array of structures
+    uint public nextId = 0;
+
+    function addStudent(string memory name, uint marks) public {
+        students.push(Student(nextId, name, marks));
+        nextId++;
+    }
+
+    function getStudent(uint index) public view returns (uint, string memory, uint) {
+        require(index < students.length, "Invalid index");
+        Student memory s = students[index];
+        return (s.id, s.name, s.marks);
+    }
+
+    function totalStudents() public view returns (uint) {
+        return students.length;
+    }
+
+    receive() external payable {}        // plain Ether without data
+    fallback() external payable {}       // call to a function that does not exist
+}
+Steps: Compile in Remix, click Deploy, call addStudent with a name and marks, read the record with getStudent(0) or students(0), and check totalStudents. To test the fallback, use Low-level interactions: send a transaction with some data or value and no function name.
+Observation (gas and fee): after each transaction, open the log in the Remix console and note these values.
+• Gas (gas limit), Transaction cost (total gas used) and Execution cost (gas used by the code alone).
+• Fee = gas used x gas price. Deployment costs far more gas than a call, addStudent (a storage write) costs more than getStudent (a view call costs no gas when called directly).
+Complexity note: addStudent and getStudent are O(1). Searching the array by id in a loop would be O(n) and increase gas.
+Conclusion: Student data was created using a struct, an array and a fallback function in Solidity, and the gas and transaction fee were observed.
+Viva questions and answers
+1. What are fixed and dynamic arrays in Solidity? A fixed-size array has its length set when declared (uint[3] a;) and cannot grow. A dynamic array (uint[] a;) has no preset length; elements are added with push and removed with pop, and its length is read with length.
+2. What is an array in Solidity? A data structure that stores a fixed or variable number of elements of the same type in contiguous locations, each with an index starting at 0. Syntax: <type> <name>[size].
+3. What is a structure in Solidity? Define its syntax. A struct is a custom data type that groups variables of different types, used to represent a record. Syntax: struct Name { type var1; type var2; }. Members are accessed with the dot operator, for example s.name.
+4. What is a fallback function? An unnamed function that runs when the contract receives a call to a function that does not exist, or plain Ether with no data. It is external, returns nothing, appears once per contract, and must b
