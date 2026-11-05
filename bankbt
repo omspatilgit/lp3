@@ -1,0 +1,42 @@
+Practical 3: Banking Smart Contract (Deposit, Withdraw, Show Balance)
+Aim: Write a smart contract on a test network for a customer's bank account with deposit, withdraw and show-balance operations.
+Theory:
+• A smart contract is code stored on the blockchain that runs automatically when its conditions are met; its results are transparent and irreversible.
+• Solidity is the statically typed, contract-oriented language used to write Ethereum smart contracts. Remix IDE is the browser tool used to write, compile, deploy and test them.
+• Key words: payable (function can receive ETH), msg.sender (caller's address), msg.value (ETH sent), mapping (key to value storage), require (condition check that reverts if false), view (read-only function).
+Code (Solidity):
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Bank {
+    mapping(address => uint256) private balances;   // balance of each customer (in wei)
+
+    function deposit() public payable {
+        require(msg.value > 0, "Send some ether");
+        balances[msg.sender] += msg.value;
+    }
+
+    function withdraw(uint256 amount) public {       // amount in wei
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+        balances[msg.sender] -= amount;              // update first, then send
+        payable(msg.sender).transfer(amount);
+    }
+
+    function showBalance() public view returns (uint256) {
+        return balances[msg.sender];
+    }
+}
+Steps in Remix:
+1. Create Bank.sol, paste the code, and click Compile.
+2. In Deploy & Run, choose environment Remix VM (or an injected MetaMask test network), and click Deploy.
+3. Deposit: enter a Value (for example 10 Ether), then click deposit. The contract balance becomes 10 ETH and your account balance drops by 10 ETH plus gas.
+4. Withdraw: enter the amount in wei (5 ETH = 5000000000000000000) and click withdraw.
+5. Click showBalance to see the remaining balance.
+If your manual's version (SimpleBank) is expected: its flow is Deploy, setManager (manager address), joinAsClient (client address), deposit 10 ETH from the client, withdraw 5, sendInterest from the manager (1 ETH to each client), and getContractBalance. It uses a struct client_account, an array clients[], and the modifiers onlyManager and onlyClients.
+Complexity / gas note: deposit, withdraw and showBalance are O(1) because they use a mapping. In SimpleBank, the onlyClients modifier and sendInterest loop over the clients array, so they are O(n) and cost more gas as clients grow.
+Conclusion: A banking smart contract with deposit, withdraw and show-balance was written and tested in Remix.
+Viva questions and answers
+1. What is Solidity? A high-level, statically typed, contract-oriented programming language (syntax similar to JavaScript) for writing smart contracts that run on the Ethereum Virtual Machine. It was proposed by Gavin Wood in 2014.
+2. How is Solidity different from Python, Java or C++? Solidity programs run on the blockchain (EVM), not on your own machine. Every operation costs gas, deployed code cannot be changed, storage is permanent and public, there is no floating-point type, no file or network access, and errors can cost real money. It has blockchain-specific types such as address, plus payable, msg.sender and modifier.
+3. What is EVM bytecode? The low-level machine code that the Solidity compiler produces. It is a sequence of opcodes that the Ethereum Virtual Machine executes on every node, and each opcode has a gas cost. The bytecode is what gets stored at the contract address when you deploy.
+4. What are the differences between Ethereum, blockchain and Bitcoin? Blockchain is the underlying technology (a distributed ledger). Bitcoin is one application of it, a digital currency. Ethereum is a blockchain platform that also supports smart contracts and dApps, with Ether as its coin.
